@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Venta</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">VENTA</h1>
+        <h3 class="mb-4">INGRESE LOS DATOS NECESARIOS</h3>
+        <form id="generarVentaForm" action="{{ url_for('admin.generar_venta') }}" method="POST">
+            <div class="mb-3">
+                <label for="id_matricula" class="form-label">Modelo y Matrícula del Vehículo</label>
+                <select id="id_matricula" name="id_matricula" class="form-select">
+                    <option value="" disabled selected>Seleccione una matrícula</option>
+                    {% for vehiculo in vehiculos %}
+                    <option value="{{ vehiculo['matricula'] }}">{{ vehiculo['matricula'] }} - {{ vehiculo['nombre_modelo'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="nombre_cliente" class="form-label">Nombre del Cliente</label>
+                <input type="text" name="nombre_cliente" id="nombre_cliente" class="form-control" placeholder="Ingrese el nombre del cliente" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="apellido_cliente" class="form-label">Apellido del Cliente</label>
+                <input type="text" name="apellido_cliente" id="apellido_cliente" class="form-control" placeholder="Ingrese el apellido del cliente" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="dni_cliente" class="form-label">DNI del Cliente</label>
+                <input type="text" name="dni_cliente" id="dni_cliente" class="form-control" placeholder="Ingrese el DNI del cliente" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="telefono_cliente" class="form-label">Teléfono del Cliente</label>
+                <input type="text" name="telefono_cliente" id="telefono_cliente" class="form-control" placeholder="Ingrese el teléfono del cliente" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="direccion_cliente" class="form-label">Dirección del Cliente</label>
+                <input type="text" name="direccion_cliente" id="direccion_cliente" class="form-control" placeholder="Ingrese la dirección del cliente" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico del Cliente</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Ingrese el correo electrónico del cliente" required>
+            </div>
+        
+            <div class="mb-3">
+                <label for="id_vendedor" class="form-label">Vendedor</label>
+                <select name="id_vendedor" id="id_vendedor" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un vendedor</option>
+                    {% for vendedor in vendedores %}
+                        <option value="{{ vendedor['id'] }}">{{ vendedor['nombre'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="metodo_pago" class="form-label">Método de Pago</label>
+                <select name="metodo_pago" id="metodo_pago" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un método de pago</option>
+                    <option value="Al Contado">Contado</option>
+                    <option value="Financiado">Financiado</option>
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="precio_final" class="form-label">Precio Final</label>
+                <input type="number" name="precio_final" id="precio_final" class="form-control" placeholder="Ingrese el precio final de la venta" required>
+            </div>
+        
+            <button type="submit" class="btn btn-primary w-100">Registrar Venta</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
